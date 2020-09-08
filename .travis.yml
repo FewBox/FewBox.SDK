@@ -1,0 +1,15 @@
+language: csharp
+mono: none
+sudo: required
+dist: xenial
+dotnet: 3.1
+env:
+  - PROJECTNAME=FewBox.SDK PROJECTUNITTESTNAME=$PROJECTNAME.UnitTest
+install:
+  - dotnet restore $TRAVIS_BUILD_DIR/$PROJECTNAME/$PROJECTNAME.csproj
+  - dotnet restore $TRAVIS_BUILD_DIR/$PROJECTUNITTESTNAME/$PROJECTUNITTESTNAME.csproj
+script:
+  - dotnet test $TRAVIS_BUILD_DIR/$PROJECTUNITTESTNAME/$PROJECTUNITTESTNAME.csproj # q[uiet], m[inimal], n[ormal], d[etailed], and diag[nostic]
+  - dotnet pack -c Release $TRAVIS_BUILD_DIR/$PROJECTNAME/$PROJECTNAME.csproj
+after_success:
+  - dotnet nuget push $TRAVIS_BUILD_DIR/$PROJECTNAME/bin/Release/$PROJECTNAME.*.nupkg -k $NUGET_KEY -s https://api.nuget.org/v3/index.json
