@@ -10,16 +10,14 @@ namespace FewBox.SDK.Core
     class TryCatchService : ITryCatchService
     {
         private ILogger Logger { get; set; }
-        private IMailService MailService { get; set; }
         private FewBoxSDKConfig FewBoxSDKConfig { get; set; }
 
-        public TryCatchService(ILogger<TryCatchService> logger, IMailService mailService, FewBoxSDKConfig fewBoxSDKConfig)
+        public TryCatchService(ILogger<TryCatchService> logger, FewBoxSDKConfig fewBoxSDKConfig)
         {
             this.Logger = logger;
-            this.MailService = mailService;
             this.FewBoxSDKConfig = fewBoxSDKConfig;
         }
-        public void Execute(Action action, bool isNeedNotification)
+        public void Execute(Action action)
         {
             try
             {
@@ -30,10 +28,6 @@ namespace FewBox.SDK.Core
                 StringBuilder exceptionDetail = new StringBuilder();
                 this.BuildException(exceptionDetail, exception);
                 this.Logger.LogError(exceptionDetail.ToString());
-                if (isNeedNotification)
-                {
-                    this.MailService.OpsNotification(exception.Message, exceptionDetail.ToString(), new List<string> { this.FewBoxSDKConfig.OpsEmail });
-                }
             }
         }
 

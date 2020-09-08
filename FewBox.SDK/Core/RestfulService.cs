@@ -20,12 +20,7 @@ namespace FewBox.SDK.Core
             this.TryCatchService.Execute(() =>
             {
                 RestfulUtility.Post<dynamic, dynamic>(url, token, package);
-            }, this.IsNeedNotification());
-        }
-
-        protected bool IsNeedNotification()
-        {
-            return false;
+            });
         }
     }
 }
