@@ -1,13 +1,14 @@
 ﻿using System;
 using FewBox.SDK.Config;
 using FewBox.SDK.Core;
+using Microsoft.Extensions.Logging;
 
 namespace FewBox.SDK.Realtime
 {
-    class RealtimeService : RestfulService, IRealtimeService
+    class RestfulRealtimeService : RestfulService, IRealtimeService
     {
-        public RealtimeService(ITryCatchService tryCatchService, ICredentialService credentialService, FewBoxSDKConfig fewBoxSDKConfig)
-        : base(tryCatchService, credentialService, fewBoxSDKConfig)
+        public RestfulRealtimeService(ITryCatchService tryCatchService, ICredentialService credentialService, FewBoxSDKConfig fewBoxSDKConfig, ILogger<RestfulRealtimeService> logger)
+        : base(tryCatchService, credentialService, fewBoxSDKConfig, logger)
         {
         }
 

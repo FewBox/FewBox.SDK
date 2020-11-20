@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using FewBox.Core.Utility.Net;
 using FewBox.SDK.Config;
 using FewBox.SDK.Core;
+using Microsoft.Extensions.Logging;
 
 namespace FewBox.SDK.Mail
 {
-    class MailService : RestfulService, IMailService
+    class RestfulMailService : RestfulService, IMailService
     {
-        public MailService(ITryCatchService tryCatchService, ICredentialService credentialService, FewBoxSDKConfig fewBoxSDKConfig)
-        : base(tryCatchService, credentialService, fewBoxSDKConfig)
+        public RestfulMailService(ITryCatchService tryCatchService, ICredentialService credentialService, FewBoxSDKConfig fewBoxSDKConfig, ILogger<RestfulMailService> logger)
+        : base(tryCatchService, credentialService, fewBoxSDKConfig, logger)
         {
         }
 
