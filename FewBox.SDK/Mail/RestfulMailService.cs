@@ -14,7 +14,12 @@ namespace FewBox.SDK.Mail
         {
         }
 
-        public void OpsNotification(string name, string content, IList<string> toAddresses)
+        public void ReceiveOpsNotification(Action<EmailMessage> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendOpsNotification(string name, string content, IList<string> toAddresses)
         {
             string token = String.Empty;
             // Todo: Need to validate by AK & SK.
