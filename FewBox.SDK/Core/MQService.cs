@@ -77,6 +77,7 @@ namespace FewBox.SDK.Core
                 channel.BasicConsume(queue: queue,
                              autoAck: true,
                              consumer: consumer);
+                Console.ReadLine();
             }
         }
     }
