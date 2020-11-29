@@ -9,7 +9,7 @@ using Moq;
 
 namespace FewBox.Sdk.UnitTest
 {
-    //[TestClass]
+    [TestClass]
     public class RealtimeMQUnitTest
     {
         private IMailService MailService { get; set; }
@@ -22,7 +22,7 @@ namespace FewBox.Sdk.UnitTest
                 MQ = new MQConfig
                 {
                     HostName = "localhost",
-                    Port = 31849,
+                    Port = 5672,
                     UserName = "fewbox",
                     Password = "landpy",
                     Exchange = ""
@@ -39,20 +39,6 @@ namespace FewBox.Sdk.UnitTest
         {
             this.MailService.SendOpsNotification("FewBox", "Wellcome to use our product.",
             new List<string> { "support@fewbox.com" });
-        }
-
-        [TestMethod]
-        public void TestReseiveOpsNotification()
-        {
-            this.MailService.ReceiveOpsNotification((emailMessage) =>
-            {
-                StringBuilder toAddresses = new StringBuilder();
-                foreach (var toAddress in emailMessage.ToAddresses)
-                {
-                    toAddresses.AppendFormat("{0};", toAddress);
-                }
-                Debug.WriteLine($"{emailMessage.Name}-{emailMessage.Content}:{toAddresses.ToString()}");
-            });
         }
     }
 }

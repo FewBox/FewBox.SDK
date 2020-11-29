@@ -2,6 +2,6 @@
 {
     public interface IRealtimeService
     {
-        void NotifyAll(string message, string desciption);
+        void NotifyAll(string message, string description);
     }
 }

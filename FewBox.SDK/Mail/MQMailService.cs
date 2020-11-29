@@ -11,12 +11,7 @@ namespace FewBox.SDK.Mail
         public MQMailService(FewBoxSDKConfig fewBoxSDKConfig, ILogger<MQMailService> logger)
         : base(fewBoxSDKConfig, logger)
         {
-            logger.LogDebug($"MQ Host: {fewBoxSDKConfig.MQ.HostName} {fewBoxSDKConfig.MQ.Port}");
-        }
-
-        public void ReceiveOpsNotification(Action<EmailMessage> action)
-        {
-            this.Consume(QueueNames.Mail, action);
+            logger.LogDebug($"[MQ Init] {fewBoxSDKConfig.MQ.HostName}:{fewBoxSDKConfig.MQ.Port}");
         }
 
         public void SendOpsNotification(string name, string content, IList<string> toAddresses)
