@@ -29,15 +29,16 @@ namespace FewBox.SDK.Extension
             else if (fewboxIntegrationType == FewBoxIntegrationType.MessageQueue)
             {
                 services.AddScoped<IMailService, MQMailService>();
-                services.AddSingleton<IMQListenerService<EmailMessage>, MQListenerService<EmailMessage>>();
                 if (fewBoxListenerHostType == FewBoxListenerHostType.Web)
                 {
                     if (fewBoxListenerType.HasFlag(FewBoxListenerType.Email))
                     {
+                        services.AddSingleton<IMQListenerService<EmailMessage>, MQListenerService<EmailMessage>>();
                         services.AddHostedService<MQMailHostService>();
                     }
                     if (fewBoxListenerType.HasFlag(FewBoxListenerType.Plan))
                     {
+                        services.AddSingleton<IMQListenerService<PlanMessage>, MQListenerService<PlanMessage>>();
                         services.AddHostedService<MQPlanHostService>();
                     }
                 }
