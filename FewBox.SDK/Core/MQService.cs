@@ -25,6 +25,7 @@ namespace FewBox.SDK.Core
             };
             this.Connection = factory.CreateConnection();
             this.Channel = this.Connection.CreateModel();
+            logger.LogDebug($"[MQ Init] {fewBoxSDKConfig.MQ.HostName}:{fewBoxSDKConfig.MQ.Port}");
         }
 
         protected void Publish(string queue, T message)

@@ -11,13 +11,10 @@ namespace FewBox.SDK.Mail
         public MQMailService(FewBoxSDKConfig fewBoxSDKConfig, ILogger<MQMailService> logger)
         : base(fewBoxSDKConfig, logger)
         {
-            logger.LogDebug($"[MQ Init] {fewBoxSDKConfig.MQ.HostName}:{fewBoxSDKConfig.MQ.Port}");
         }
 
         public void SendOpsNotification(string name, string content, IList<string> toAddresses)
         {
-            string token = String.Empty;
-            // Todo: Need to validate by AK & SK.
             this.Publish(QueueNames.Mail, new EmailMessage { Name = name, Content = content, ToAddresses = toAddresses });
         }
     }

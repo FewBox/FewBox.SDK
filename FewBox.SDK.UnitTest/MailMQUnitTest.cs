@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 using FewBox.SDK.Config;
 using FewBox.SDK.Mail;
 using Microsoft.Extensions.Logging;
@@ -10,7 +8,7 @@ using Moq;
 namespace FewBox.Sdk.UnitTest
 {
     //[TestClass]
-    public class RealtimeMQUnitTest
+    public class MailMQUnitTest
     {
         private IMailService MailService { get; set; }
 
