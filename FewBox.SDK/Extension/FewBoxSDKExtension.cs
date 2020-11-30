@@ -1,3 +1,4 @@
+using FewBox.SDK.Auth;
 using FewBox.SDK.Config;
 using FewBox.SDK.Core;
 using FewBox.SDK.Mail;
@@ -8,7 +9,9 @@ namespace FewBox.SDK.Extension
 {
     public static class FewBoxSDKExtension
     {
-        public static void AddFewBoxSDK(this IServiceCollection services, FewBoxIntegrationType fewboxIntegrationType, FewBoxListenerHostType fewBoxListenerHostType = FewBoxListenerHostType.None)
+        public static void AddFewBoxSDK(this IServiceCollection services, FewBoxIntegrationType fewboxIntegrationType,
+        FewBoxListenerHostType fewBoxListenerHostType = FewBoxListenerHostType.None,
+        FewBoxListenerType fewBoxListenerType = FewBoxListenerType.None)
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
             .AddJsonFile("./appsettings.json")
@@ -27,18 +30,25 @@ namespace FewBox.SDK.Extension
             {
                 services.AddScoped<IMailService, MQMailService>();
                 services.AddSingleton<IMQListenerService<EmailMessage>, MQListenerService<EmailMessage>>();
-            }
-            if (fewBoxListenerHostType == FewBoxListenerHostType.Web)
-            {
-                services.AddHostedService<MQMailHostService>();
-            }
-            else if (fewBoxListenerHostType == FewBoxListenerHostType.Console)
-            {
-                // Do Nothing
-            }
-            else
-            {
-                // Do Nothing
+                if (fewBoxListenerHostType == FewBoxListenerHostType.Web)
+                {
+                    if (fewBoxListenerType.HasFlag(FewBoxListenerType.Email))
+                    {
+                        services.AddHostedService<MQMailHostService>();
+                    }
+                    if (fewBoxListenerType.HasFlag(FewBoxListenerType.Plan))
+                    {
+                        services.AddHostedService<MQPlanHostService>();
+                    }
+                }
+                else if (fewBoxListenerHostType == FewBoxListenerHostType.Console)
+                {
+                    // Do Nothing
+                }
+                else
+                {
+                    // Do Nothing
+                }
             }
         }
     }
