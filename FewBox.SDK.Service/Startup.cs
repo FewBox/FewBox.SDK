@@ -19,7 +19,7 @@ namespace FewBox.SDK.Service
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFewBoxSDK(FewBoxIntegrationType.MessageQueue, FewBoxListenerHostType.Console);
+            services.AddFewBoxSDK(FewBoxIntegrationType.MessageQueue, FewBoxListenerHostType.Console, FewBoxListenerType.Email);
             services.AddLogging();
             services.AddScoped<IMQMailHandler, TestMQMailHandler>();
         }

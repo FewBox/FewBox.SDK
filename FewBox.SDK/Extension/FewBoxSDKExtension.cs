@@ -45,7 +45,14 @@ namespace FewBox.SDK.Extension
                 }
                 else if (fewBoxListenerHostType == FewBoxListenerHostType.Console)
                 {
-                    // Do Nothing
+                    if (fewBoxListenerType.HasFlag(FewBoxListenerType.Email))
+                    {
+                        services.AddSingleton<IMQListenerService<EmailMessage>, MQListenerService<EmailMessage>>();
+                    }
+                    if (fewBoxListenerType.HasFlag(FewBoxListenerType.Plan))
+                    {
+                        services.AddSingleton<IMQListenerService<PlanMessage>, MQListenerService<PlanMessage>>();
+                    }
                 }
                 else
                 {
