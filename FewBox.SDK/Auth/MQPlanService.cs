@@ -13,7 +13,7 @@ namespace FewBox.SDK.Auth
 
         public void QuitProPlan(string email, string product)
         {
-            this.Publish(QueueNames.Plan, new PlanMessage { Type = PlanType.Free });
+            this.Publish(QueueNames.Plan,new PlanMessage { Type = PlanType.Free });
         }
 
         public void StartFreePlan(string email, string product)

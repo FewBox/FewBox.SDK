@@ -6,7 +6,7 @@ using Moq;
 
 namespace FewBox.Sdk.UnitTest
 {
-    //[TestClass]
+    [TestClass]
     public class PlanMQUnitTest
     {
         private IPlanService PlanService { get; set; }

@@ -29,6 +29,7 @@ namespace FewBox.SDK.Extension
             else if (fewboxIntegrationType == FewBoxIntegrationType.MessageQueue)
             {
                 services.AddScoped<IMailService, MQMailService>();
+                services.AddScoped<IPlanService, MQPlanService>();
                 if (fewBoxListenerHostType == FewBoxListenerHostType.Web)
                 {
                     if (fewBoxListenerType.HasFlag(FewBoxListenerType.Email))

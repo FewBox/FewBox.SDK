@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using FewBox.SDK.Extension;
 using FewBox.SDK.Mail;
+using FewBox.SDK.Auth;
 
 namespace FewBox.SDK.Web
 {
@@ -27,9 +28,10 @@ namespace FewBox.SDK.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddFewBoxSDK(FewBoxIntegrationType.MessageQueue, FewBoxListenerHostType.Web);
+            services.AddFewBoxSDK(FewBoxIntegrationType.MessageQueue, FewBoxListenerHostType.Web, FewBoxListenerType.Plan | FewBoxListenerType.Email);
             services.AddLogging();
             services.AddSingleton<IMQMailHandler, TestMQMailHandler>();
+            services.AddSingleton<IMQPlanHandler, TestMQPlanHandler>();
             services.AddControllers();
         }
 

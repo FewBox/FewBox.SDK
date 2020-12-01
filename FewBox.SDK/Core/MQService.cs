@@ -39,7 +39,7 @@ namespace FewBox.SDK.Core
             var body = Encoding.UTF8.GetBytes(JsonUtility.Serialize<T>(message));
 
             this.Channel.BasicPublish(exchange: this.FewBoxSDKConfig.MQ.Exchange,
-                     routingKey: RoutingKeys.Mail,
+                     routingKey: queue,
                      basicProperties: null,
                      body: body);
             this.Logger.LogDebug("Sent {0}", message);

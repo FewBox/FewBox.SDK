@@ -7,7 +7,7 @@ using Moq;
 
 namespace FewBox.Sdk.UnitTest
 {
-    //[TestClass]
+    [TestClass]
     public class MailMQUnitTest
     {
         private IMailService MailService { get; set; }
