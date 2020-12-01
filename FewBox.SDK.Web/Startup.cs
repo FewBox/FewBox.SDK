@@ -30,8 +30,8 @@ namespace FewBox.SDK.Web
         {
             services.AddFewBoxSDK(FewBoxIntegrationType.MessageQueue, FewBoxListenerHostType.Web, FewBoxListenerType.Plan | FewBoxListenerType.Email);
             services.AddLogging();
-            services.AddSingleton<IMQMailHandler, TestMQMailHandler>();
-            services.AddSingleton<IMQPlanHandler, TestMQPlanHandler>();
+            services.AddScoped<IMQMailHandler, TestMQMailHandler>();
+            services.AddScoped<IMQPlanHandler, TestMQPlanHandler>();
             services.AddControllers();
         }
 
