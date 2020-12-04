@@ -11,19 +11,34 @@ namespace FewBox.SDK.Auth
         {
         }
 
-        public void QuitProPlan(string email, string product)
+        public void QuitProPlan(PlanCustomer customer, PlanProduct product)
         {
-            this.Publish(QueueNames.Plan,new PlanMessage { Type = PlanType.Free });
+            this.Publish(QueueNames.Plan, new PlanMessage
+            {
+                Type = PlanType.Free,
+                Customer = customer,
+                Product = product
+            });
         }
 
-        public void StartFreePlan(string email, string product)
+        public void StartFreePlan(PlanCustomer customer, PlanProduct product)
         {
-            this.Publish(QueueNames.Plan, new PlanMessage { Type = PlanType.Free });
+            this.Publish(QueueNames.Plan, new PlanMessage
+            {
+                Type = PlanType.Free,
+                Customer = customer,
+                Product = product
+            });
         }
 
-        public void UpgradeProPlan(string email, string product)
+        public void UpgradeProPlan(PlanCustomer customer, PlanProduct product)
         {
-            this.Publish(QueueNames.Plan, new PlanMessage { Type = PlanType.Pro });
+            this.Publish(QueueNames.Plan, new PlanMessage
+            {
+                Type = PlanType.Pro,
+                Customer = customer,
+                Product = product
+            });
         }
     }
 }

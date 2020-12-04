@@ -1,9 +1,11 @@
-﻿namespace FewBox.SDK.Auth
+﻿using FewBox.SDK.Core;
+
+namespace FewBox.SDK.Auth
 {
     public interface IPlanService
     {
-        void StartFreePlan(string email, string product);
-        void UpgradeProPlan(string email, string product);
-        void QuitProPlan(string email, string product);
+        void StartFreePlan(PlanCustomer customer, PlanProduct product);
+        void UpgradeProPlan(PlanCustomer customer, PlanProduct product);
+        void QuitProPlan(PlanCustomer customer, PlanProduct product);
     }
 }
