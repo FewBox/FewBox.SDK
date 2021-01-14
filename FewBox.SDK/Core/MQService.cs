@@ -25,7 +25,7 @@ namespace FewBox.SDK.Core
             };
             this.Connection = factory.CreateConnection();
             this.Channel = this.Connection.CreateModel();
-            logger.LogDebug($"[MQ Init] {fewBoxSDKConfig.MQ.HostName}:{fewBoxSDKConfig.MQ.Port}");
+            logger.LogDebug("[MQ Init] {0}:{1}", fewBoxSDKConfig.MQ.HostName, fewBoxSDKConfig.MQ.Port);
         }
 
         protected void Publish(string queue, T message)
@@ -35,14 +35,13 @@ namespace FewBox.SDK.Core
                              exclusive: false,
                              autoDelete: false,
                              arguments: null);
-
-            var body = Encoding.UTF8.GetBytes(JsonUtility.Serialize<T>(message));
-
+            string messageJson = JsonUtility.Serialize<T>(message);
+            var body = Encoding.UTF8.GetBytes(messageJson);
             this.Channel.BasicPublish(exchange: this.FewBoxSDKConfig.MQ.Exchange,
                      routingKey: queue,
                      basicProperties: null,
                      body: body);
-            this.Logger.LogDebug("Sent {0}", message);
+            this.Logger.LogDebug("[MQ Send] {0}:{1}:{2}", this.FewBoxSDKConfig.MQ.Exchange, queue, messageJson);
         }
     }
 }
