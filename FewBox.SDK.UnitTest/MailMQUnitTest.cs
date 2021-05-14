@@ -19,8 +19,8 @@ namespace FewBox.Sdk.UnitTest
             {
                 MQ = new MQConfig
                 {
-                    HostName = "localhost",
-                    Port = 5672,
+                    HostName = "192.168.1.38",
+                    Port = 49156,
                     UserName = "fewbox",
                     Password = "landpy",
                     Exchange = ""
@@ -35,8 +35,7 @@ namespace FewBox.Sdk.UnitTest
         [TestMethod]
         public void TestSendOpsNotification()
         {
-            this.MailService.SendOpsNotification("FewBox", "Wellcome to use our product.",
-            new List<string> { "support@fewbox.com" });
+            this.MailService.SendOpsNotification("FewBox", "Wellcome to use our product.", new List<string> { "support@fewbox.com" });
         }
     }
 }
